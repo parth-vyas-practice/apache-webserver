@@ -6,12 +6,9 @@
 package 'httpd' do
         action :install
 end
-file '/var/www/html/index.html'do
-        content "
-	create server through chef
-	HOSTNAME: #{node['hostname']}
-	IP-ADDRESS: #{node['ipaddress']}
-"
+template '/var/www/html/index.html'do
+	source 'index.html.erb'
+	action :create
 end
 service 'httpd' do
         action :start
